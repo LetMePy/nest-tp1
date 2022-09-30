@@ -14,15 +14,14 @@ export class TodoController {
     }
 
     @Post()
-    createTodo(@Body() body: TodoCreate): TodoModel[] {
-        const todo = new TodoModel(body.name, body.description, TodoModel.strToEnum(body.status));
+    createTodo(@Body() todoCreate: TodoCreate): TodoModel[] {
+        const todo = new TodoModel(todoCreate.name, todoCreate.description, TodoModel.strToEnum(todoCreate.status));
         this.todos.push(todo);
         return this.todos;
     }
 
     @Get('/:id')
-    getTodoById(@Param() params) {
-        const id = params.id;
+    getTodoById(@Param("id") id: string) {
         const todo = this.todos.find((element) => element.id === id);
         if (todo) {
             return todo;
@@ -45,17 +44,17 @@ export class TodoController {
     }
 
     @Put('/:id')
-    updateTodoById(@Param() params, @Body() updateTodo: TodoUpdate) {
+    updateTodoById(@Param() params, @Body() todoUpdate: TodoUpdate) {
         const id = params.id;
         const todo = this.todos.find((element) => element.id === id);
         if (todo) {
             const todoId = this.todos.indexOf(todo);
-            if (updateTodo.name !== undefined)
-                this.todos[todoId].name = updateTodo.name;
-            if (updateTodo.description !== undefined)
-                this.todos[todoId].description = updateTodo.description;
-            if (updateTodo.status !== undefined)
-                this.todos[todoId].status = TodoModel.strToEnum(updateTodo.status);
+            if (todoUpdate.name !== undefined)
+                this.todos[todoId].name = todoUpdate.name;
+            if (todoUpdate.description !== undefined)
+                this.todos[todoId].description = todoUpdate.description;
+            if (todoUpdate.status !== undefined)
+                this.todos[todoId].status = TodoModel.strToEnum(todoUpdate.status);
             return this.todos;
         } else {
             return 'not found';
