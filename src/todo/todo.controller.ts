@@ -15,7 +15,7 @@ export class TodoController {
 
     @Post()
     createTodo(@Body() body: TodoCreate): TodoModel[] {
-        const todo = new TodoModel(body.name, body.description, body.status);
+        const todo = new TodoModel(body.name, body.description, TodoModel.strToEnum(body.status));
         this.todos.push(todo);
         return this.todos;
     }
@@ -55,7 +55,7 @@ export class TodoController {
             if (updateTodo.description !== undefined)
                 this.todos[todoId].description = updateTodo.description;
             if (updateTodo.status !== undefined)
-                this.todos[todoId].status = updateTodo.status;
+                this.todos[todoId].status = TodoModel.strToEnum(updateTodo.status);
             return this.todos;
         } else {
             return 'not found';

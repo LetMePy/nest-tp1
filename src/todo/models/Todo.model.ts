@@ -28,4 +28,13 @@ export class TodoModel {
             this.status = TodoStatusEnum.waiting;
         }
     }
+
+    static strToEnum(status: string):  TodoStatusEnum{
+        switch (status) {
+            case 'actif': return TodoStatusEnum.actif;
+            case 'waiting': return TodoStatusEnum.waiting;
+            case 'done': return TodoStatusEnum.done;
+            default: return TodoStatusEnum.waiting;
+        }
+    }
 }
