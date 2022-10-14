@@ -15,7 +15,7 @@ export class TodoController {
 
     @Post()
     createTodo(@Body() todoCreate: TodoCreate): TodoModel[] {
-        const todo = new TodoModel(todoCreate.name, todoCreate.description, );
+        const todo = new TodoModel(todoCreate.name, todoCreate.description);
         this.todos.push(todo);
         return this.todos;
     }

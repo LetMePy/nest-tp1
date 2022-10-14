@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { PremierModule } from './premier/premier.module';
 import { TodoModule } from './todo/todo.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {TodoEntity} from "./todo/entities/todo.entity";
 
 @Module({
   imports: [PremierModule, TodoModule,
@@ -15,7 +16,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
         username:'postgres',
         password:'monmon',
         database:'DB',
-        entities:[],
+        entities:[TodoEntity],
         synchronize:true,
         logging: true
       }
