@@ -6,12 +6,18 @@ import {
   randSkill,
   randUserName,
   randEmail,
-  randPassword, randNumber, randJobTitle, randFirstName, randJobArea, randLastName, randFilePath,
+  randPassword,
+  randNumber,
+  randJobTitle,
+  randFirstName,
+  randJobArea,
+  randLastName,
+  randFilePath,
 } from '@ngneat/falso';
 import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
-import {Cv} from "../cv/entities/cv.entity";
-import {CvService} from "../cv/cv.service";
+import { Cv } from '../cv/entities/cv.entity';
+import { CvService } from '../cv/cv.service';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
@@ -19,17 +25,17 @@ async function bootstrap() {
   const userService = app.get(UserService);
   const cvService = app.get(CvService);
 
-  // for (let i = 0; i < 50; i++) {
-  //   const skill = new Skill();
-  //   skill.designation = randSkill();
-  //   await skillService.create(skill);
-  //
-  //   const user = new User();
-  //   user.username = randUserName();
-  //   user.email = randEmail();
-  //   user.password = randPassword();
-  //   await userService.create(user);
-  // }
+  for (let i = 0; i < 50; i++) {
+    const skill = new Skill();
+    skill.designation = randSkill();
+    await skillService.create(skill);
+
+    const user = new User();
+    user.username = randUserName();
+    user.email = randEmail();
+    user.password = randPassword();
+    await userService.create(user);
+  }
   for (let i = 0; i < 50; i++) {
     const cv = new Cv();
     cv.age = randNumber();
@@ -49,6 +55,7 @@ async function bootstrap() {
         skills.push(skill);
       }
     }
+    cv.skills = skills;
     cvService.create(cv);
   }
   await app.close();
