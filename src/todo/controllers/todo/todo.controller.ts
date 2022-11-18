@@ -1,10 +1,10 @@
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
-import {TodoModel} from "./models/Todo.model";
-import {TodoCreate} from "./DTO/todo-create.dto";
-import {TodoUpdate} from "./DTO/todo-update.dto";
+import {TodoModel} from "../../models/Todo.model";
+import {TodoCreate} from "../../DTO/todo-create.dto";
+import {TodoUpdate} from "../../DTO/todo-update.dto";
 
 
-@Controller('todo')
+@Controller({path: 'todo', version: '1',})
 export class TodoController {
     private todos: TodoModel[] = [];
 
